@@ -1,0 +1,46 @@
+{
+  "folders": [
+	{
+		"path": "../2.1 Heading Element"
+	},
+	{
+		"path": "../2.2 Paragraph Element"
+	},
+	{
+		"path": "../2.3 Void Elements"
+	},
+	{
+		"path": "../2.4 Movie Ranking Project"
+	},
+	{
+		"path": "../3.0 List Elements"
+	},
+	{
+		"path": "."
+	},
+	{
+		"path": "../3.2 Anchor Elements 2"
+	},
+	{
+		"path": "../3.2 Anchor Elements"
+	},
+	{
+		"path": "../3.1 Nesting and Indentation"
+	},
+	{
+		"path": "../3.3 Image Elements"
+	},
+	{
+		"path": "../4.0 File Paths"
+	},
+	{
+		"path": "../4.3 HTML Porfolio Project"
+	},
+	{
+		"path": "../4.1+Webpages"
+	}
+],
+  "settings": {
+    "liveServer.settings.multiRootWorkspaceName": "4.3 HTML Porfolio Project"
+  }
+}
