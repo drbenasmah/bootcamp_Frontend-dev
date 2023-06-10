@@ -17,7 +17,17 @@ function diceChallenge() {
   var randomImage2 = diceImages[randomNumber2 - 1];
   var player2Image = document.querySelector(".img2");
   player2Image.setAttribute("src", "./images/dice" + randomNumber2 + ".png");
-  console.log(randomNumber1);
-  console.log(randomNumber2);
+
+  var resultText = document.querySelector("h1");
+
+  if (randomNumber1 > randomNumber2) {
+    resultText.textContent = " 🚩 Player 1 Wins !!!";
+  }
+  else if (randomNumber2 > randomNumber1) {
+    resultText.textContent = "Player 2 Wins !!! 🚩";
+  }
+  else {
+    resultText.textContent = "It's a Draw !!!";
+  }
 }
 diceChallenge();
