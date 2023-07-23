@@ -5,17 +5,104 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Band Name Generator</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f0f0f0;
+      color: #333;
+      margin: 0;
+      padding: 30px;
+    }
+
+    h1 {
+      font-size: 48px;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 50px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: #007bff;
+    }
+
+    h2 {
+      font-size: 36px;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 30px;
+      color: #333;
+    }
+
+    h2::after {
+      content: "✌️";
+      display: inline-block;
+      margin-left: 10px;
+      color: #007bff;
+      font-size: 42px;
+    }
+
+    form {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 30px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+      display: block;
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 15px;
+      color: #666;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 12px;
+      font-size: 18px;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      margin-bottom: 25px;
+    }
+
+    input[type="submit"] {
+      width: 100%;
+      padding: 15px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #fff;
+      background-color: #007bff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+  </style>
 </head>
 
 <body>
-  <h1>Band Name Generator</h1>
+  <h1>Benas Band Name Generator</h1>
   <form action="/submit" method="POST">
-    <label for="street">Street Name:</label>
+    <label for="street">Enter Your Street Name:</label>
     <input type="text" name="street" required>
-    <label for="pet">Pet Name:</label>
+    <label for="pet">Enter Your Pet Name:</label>
     <input type="text" name="pet" required>
-    <input type="submit" value="Submit">
+    <input type="submit" value="Get Your Band Name">
   </form>
+  <h2 id="bandName"></h2>
+
+  <script>
+    const bandName = "Stylish Band"; // Replace with the actual band name retrieved from the server
+
+    // Update the band name in the h2 element
+    document.getElementById("bandName").innerText = `Your band name is: ${bandName}✌️`;
+  </script>
 </body>
 
 </html>
+
