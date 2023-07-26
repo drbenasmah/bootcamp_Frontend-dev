@@ -2,16 +2,100 @@
 <html>
 
 <head>
-  <title>Secrets</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Benas ALX Secrets</title>
+  <style>
+    body {
+      font-family: 'Helvetica Neue', sans-serif;
+      background-color: #f0f0f0;
+      color: #333;
+      margin: 0;
+      padding: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 500px;
+      padding: 40px;
+      background-color: #fff;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    h1 {
+      font-size: 60px;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 30px;
+      text-transform: uppercase;
+      letter-spacing: 6px;
+      color: #007bff;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 25px;
+    }
+
+    label {
+      font-size: 24px;
+      font-weight: bold;
+      color: #666;
+      margin-bottom: 5px;
+    }
+
+    input[type="password"] {
+      width: 100%;
+      padding: 15px;
+      font-size: 20px;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      background-color: #f9f9f9;
+    }
+
+    input[type="submit"] {
+      padding: 18px 30px;
+      font-size: 24px;
+      font-weight: bold;
+      color: #fff;
+      background-color: #007bff;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease-in-out;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    input[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+  </style>
 </head>
 
 <body>
-  <h1>Secrets</h1>
-  <form action="/check" method="POST">
-    <label for="password">Password:</label>
-    <input type="text" id="password" name="password" required>
-    <input type="submit" value="Submit">
-  </form>
+  <div class="container">
+    <h1>Benas ALX Secrets</h1>
+    <form action="/check" method="POST">
+      <div class="form-group">
+        <label for="password">Enter the Secret Password:</label>
+        <input type="password" id="password" name="password" required>
+      </div>
+      <input type="submit" value="Unlock the Secrets">
+    </form>
+  </div>
 </body>
 
 </html>
