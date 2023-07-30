@@ -5,12 +5,86 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Name Letters</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 1rem;
+    }
+
+    input {
+      padding: 0.7rem;
+      margin-bottom: 0.7rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      width: 250px;
+      font-size: 18px;
+    }
+
+    input[type="submit"] {
+      background-color: #333;
+      color: #fff;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #555;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 32px;
+      margin-bottom: 1rem;
+    }
+
+    .message {
+      font-style: italic;
+      text-align: center;
+      color: #555;
+      margin-top: 1rem;
+      font-size: 28px; /* Increased font size for the "Enter your name" text */
+    }
+
+    /* Increase font size for "First name" and "Last name" labels */
+    label {
+      font-size: 24px;
+    }
+  </style>
 </head>
 
 <body>
-  <!-- Write your code here -->
+  <header>
+    <h1>Name Letters</h1>
+  </header>
+
+  <% if (locals.numberOfLetters) { %>
+    <h2 class="message">There are <%= numberOfLetters %> letters in your name.</h2>
+  <% } else { %>
+    <h2 class="message">Enter your name below 👇</h2>
+  <% } %>
+
   <form action="/submit" method="POST">
+    <label for="fName"></label>
     <input type="text" name="fName" placeholder="First name">
+    <label for="lName"></label>
     <input type="text" name="lName" placeholder="Last name">
     <input type="submit" value="OK">
   </form>
