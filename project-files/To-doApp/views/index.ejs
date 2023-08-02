@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ToDo List - <%= pageTitle %></title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-custom navbar-mainbg">
+    <a class="navbar-brand navbar-logo" href="#">ToDo List</a>
+    <button class="navbar-toggler" type="button" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <i class="fas fa-bars text-white"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+        <div class="hori-selector">
+          <div class="left"></div>
+        </div>
+        <li class="nav-item">
+          <a class="nav-link" href="/"><i class="far fa-copy"></i>Today</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/work"><i class="far fa-copy"></i>Work</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container mt-4">
+    <h1 class="mb-4">ToDo List - <%= pageTitle %></h1>
+
+    <!-- Task Creation Form -->
+    <form action="/create" method="post" class="mb-3">
+      <div class="form-group">
+        <label for="title">Task Title:</label>
+        <input type="text" id="title" name="title" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="description">Task Description:</label>
+        <textarea id="description" name="description" class="form-control" rows="3" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Add Task</button>
+    </form>
+
+    <!-- Task Viewing Section -->
+    <% if (tasks.length > 0) { %>
+      <ul class="list-group">
+        <% tasks.forEach((task) => { %>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span <% if (task.completed) { %>style="text-decoration: line-through;"<% } %>>
+              <%= task.title %>
+            </span>
+            <div>
+              <button class="btn btn-sm btn-success mr-2" onclick="completeTask('<%= task.id %>')" <% if (task.completed) { %>disabled<% } %>>Complete</button>
+              <button class="btn btn-sm btn-danger" onclick="deleteTask('<%= task.id %>')">Delete</button>
+            </div>
+          </li>
+        <% }) %>
+      </ul>
+    <% } else { %>
+      <p>No tasks found.</p>
+    <% } %>
+
+  </div>
+
+  <script>
+    // Function to complete a task
+    function completeTask(taskId) {
+      // Send a POST request to the server to mark the task as completed
+      fetch(`/complete/${taskId}`, {
+        method: 'POST'
+      })
+      .then(() => {
+        // Reload the page to update the task list
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.error('Error completing task:', error);
+      });
+    }
+
+    // Function to delete a task
+    function deleteTask(taskId) {
+      // Send a POST request to the server to delete the task
+      fetch(`/delete/${taskId}`, {
+        method: 'POST'
+      })
+      .then(() => {
+        // Reload the page to update the task list
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.error('Error deleting task:', error);
+      });
+    }
+  </script>
+
+  <footer>
+    <div class="container">
+      <p>&copy; <%= new Date().getFullYear() %> My Portfolio. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+
+</html>
