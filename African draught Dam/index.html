@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Checkers</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #D2B48C; /* Background color for the wooden border effect */
+        }
+
+        /* Styling for the checkerboard container with wooden border */
+        #board-container {
+            border: 5px solid #8B4513; /* Dark brown border */
+            background-color: #DEB887; /* Light brown background color inside the border */
+            box-shadow: inset 0 0 10px #8B4513; /* Wooden texture effect */
+        }
+
+        /* Styling for the checkerboard */
+        #board {
+            display: grid;
+            grid-template-columns: repeat(10, 80px);
+            grid-template-rows: repeat(10, 80px);
+        }
+
+        .brown {
+            background-color: #8B4513;
+        }
+
+        .box {
+            width: 80px;
+            height: 80px;
+            display: inline-block;
+            border: 1px solid black;
+            position: relative;
+        }
+
+        .yellow, .black {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            position: absolute;
+            top: 5px;
+            left: 5px;
+        }
+
+        .yellow {
+            background-color: yellow;
+        }
+
+        .black {
+            background-color: black;
+        }
+
+        #yellow-count, #black-count {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="board-container">
+        <div id="board">
+            <!-- Game board cells will be generated here -->
+        </div>
+    </div>
+    <div>
+        <div id="yellow-count">Yellow Marbles: 0</div>
+        <div id="black-count">Black Marbles: 0</div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const board = document.getElementById("board");
+            const rows = 10;
+            const cols = 10;
+            const yellowMarblesCount = 20;
+            const blackMarblesCount = 20;
+            let currentPlayer = 'yellow'; // yellow or black
+            let yellowCount = 0;
+            let blackCount = 0;
+
+            // Function to create the game board
+            function createBoard() {
+                for (let r = 0; r < rows; r++) {
+                    for (let c = 0; c < cols; c++) {
+                        const box = document.createElement("div");
+                        box.className = "box " + ((r + c) % 2 === 0 ? "brown" : "");
+                        board.appendChild(box);
+
+                        if (((r + c) % 2 === 0) && yellowCount < yellowMarblesCount && r >= rows - 4) {
+                            const yellowMarble = document.createElement("div");
+                            yellowMarble.className = "yellow";
+                            box.appendChild(yellowMarble);
+                            yellowCount++;
+                        }
+
+                        if (((r + c) % 2 === 0) && blackCount < blackMarblesCount && r < 4) {
+                            const blackMarble = document.createElement("div");
+                            blackMarble.className = "black";
+                            box.appendChild(blackMarble);
+                            blackCount++;
+                        }
+                    }
+                }
+
+                updateMarbleCount();
+            }
+
+            // Call the function to create the game board
+            createBoard();
+
+            // Function to update the marble count display
+            function updateMarbleCount() {
+                const yellowCountDisplay = document.getElementById("yellow-count");
+                const blackCountDisplay = document.getElementById("black-count");
+
+                yellowCountDisplay.textContent = `Yellow Marbles: ${yellowCount}`;
+                blackCountDisplay.textContent = `Black Marbles: ${blackCount}`;
+            }
+
+            // Function to handle player moves
+            function handleMove(event) {
+                const marble = event.target;
+                if (marble.classList.contains(currentPlayer)) {
+                    // Get the parent box
+                    const box = marble.parentElement;
+
+                    // Get all the boxes in the row that are not brown and not empty
+                    const nonBrownNonEmptyBoxes = Array.from(box.parentElement.querySelectorAll('.box:not(.brown):not(:empty)'));
+                    // Find the index of the current box in the nonBrownNonEmptyBoxes array
+                    const currentIndex = nonBrownNonEmptyBoxes.indexOf(box);
+
+                    // Get the next box in the same row that is empty
+                    const nextEmptyBox = box.parentElement.querySelector(`.box:not(.brown):empty:nth-child(${currentIndex + 2})`);
+
+                    if (nextEmptyBox) {
+                        nextEmptyBox.appendChild(marble);
+                        currentPlayer = currentPlayer === 'yellow' ? 'black' : 'yellow'; // Switch player turn
+                    }
+                }
+            }
+
+            // Get all marbles on the board
+            const marbles = document.querySelectorAll(".yellow, .black");
+
+            // Add event listeners to each marble to handle moves
+            marbles.forEach(marble => {
+                marble.addEventListener("click", handleMove);
+            });
+
+            // Additional game logic and rules can be implemented here
+
+        });
+    </script>
+</body>
+</html>
